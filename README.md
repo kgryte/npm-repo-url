@@ -15,28 +15,95 @@ $ npm install npm-package-repo-url
 ## Usage
 
 ``` javascript
-var get = require( 'npm-package-repo-url' );
+var urls = require( 'npm-package-repo-url' );
 ```
 
-#### get()
+#### urls( opts, clbk )
 
-Gets package repository URLs.
+Get package repository URLs.
 
 ``` javascript
-get();
+var opts = {
+	'packages': [
+		'dstructs-matrix',
+		'compute-erf',
+		'utils-copy'
+	]	
+};
+
+urls( opts, clbk );
+
+function clbk( error, data ) {
+	if ( error ) {
+		throw error;
+	}
+	console.dir( data );
+	/*
+		{
+			"dstructs-matrix": "...",
+			"compute-erf": "...",
+			"utils-copy": "..."
+		}
+	*/
+}
+```
+
+The `function` accepts the following `options`:
+
+*	__packages__: `array` of package names (*required*).
+*	__registry__: registry. Default: `'registry.npmjs.org'`.
+*	__port__: registry port. Default: `80`.
+* 	__protocol__: registry protocol. Default: `'http'`.
+
+To query an alternative registry, set the relevant options.
+
+``` javascript
+var opts = {
+	'packages': [
+		'dstructs-array',
+		'flow-map',
+		'utils-merge2'
+	],
+	'registry': 'my.favorite.npm/registry',
+	'port': 80,
+	'protocol': 'https'
+};
+
+urls( opts, clbk );
 ```
 
 
 ## Examples
 
 ``` javascript
-var get = require( 'npm-package-repo-url' );
+var ls = require( 'npm-list-author-packages' );
+var urls = require( 'npm-package-repo-url' );
+
+var opts = {
+	'username': 'kgryte'
+};
+
+ls( opts, onList );
+
+function onList( error, list ) {
+	if ( error ) {
+		throw error;
+	}
+	urls( list, onUrls );
+}
+
+function onUrls( error, data ) {
+	if ( error ) {
+		throw error;
+	}
+	console.dir( data );
+}
 ```
 
 To run the example code from the top-level application directory,
 
 ``` bash
-$ node ./examples/index.js
+$ DEBUG=* node ./examples/index.js
 ```
 
 
@@ -61,13 +128,16 @@ Options:
 
   -h,  --help                Print this message.
   -V,  --version             Print the package version.
+  -p,  --port port           Registry port. Default: 80.
+       --registry registry   Registry. Default: 'registry.npmjs.org'.
+       --protocol protocol   Registry protocol. Default: 'http'.
 ```
 
 
 ### Examples
 
 ``` bash
-$ pkgrepo dstructs-matrix compute-erf utils-copy
+$ DEBUG=* pkgrepo dstructs-matrix compute-erf utils-copy
 ```
 
 
