@@ -90,9 +90,26 @@ urls( opts, clbk );
 * @returns {Void}
 */
 function clbk( error, data ) {
+	var keys;
+	var key;
+	var out;
+	var i;
 	if ( error ) {
 		throw error;
 	}
-	console.dir( data );
+	keys = Object.keys( data );
+	for ( i = 0; i < keys.length; i++ ) {
+		key = keys[ i ];
+		out = '{';
+		out += '\"'+key+'\"';
+		out += ':';
+		if ( data[ key ] === null ) {
+			out += 'null';
+		} else {
+			out += '\"'+data[ key ]+'\"';
+		}
+		out += '}';
+		process.stdout.write( out + '\n' );
+	}
 	process.exit( 0 );
 }

@@ -27,6 +27,7 @@ var opts = {
 	'packages': [
 		'dstructs-matrix',
 		'compute-erf',
+		'log',
 		'utils-copy'
 	]	
 };
@@ -42,6 +43,7 @@ function clbk( error, data ) {
 		{
 			"dstructs-matrix": "...",
 			"compute-erf": "...",
+			"log": null,
 			"utils-copy": "..."
 		}
 	*/
@@ -73,6 +75,11 @@ urls( opts, clbk );
 ```
 
 
+## Notes
+
+*	Packages without an associated repository URL have a `url` value equal to `null`.
+
+
 ## Examples
 
 ``` javascript
@@ -86,10 +93,17 @@ var opts = {
 ls( opts, onList );
 
 function onList( error, list ) {
+	var opts;
 	if ( error ) {
 		throw error;
 	}
-	urls( list, onUrls );
+	if ( !list.length ) {
+		return {};
+	}
+	opts = {
+		'packages': list
+	};
+	urls( opts, onUrls );
 }
 
 function onUrls( error, data ) {
@@ -134,10 +148,20 @@ Options:
 ```
 
 
+### Notes
+
+*	Each package and its associated repository URL is written to `stdout` as newline-delimited [`JSON`][json].
+*	Output order is __not__ guaranteed to match input order.
+
+
 ### Examples
 
 ``` bash
-$ DEBUG=* pkgrepo dstructs-matrix compute-erf utils-copy
+$ DEBUG=* pkgrepo dstructs-matrix compute-erf utils-copy log
+# => {"dstructs-matrix":"..."}
+# => {"log":null}
+# => {"utils-copy":"..."}
+# => {"compute-erf":"..."}
 ```
 
 
@@ -219,3 +243,5 @@ Copyright &copy; 2016. Athan Reines.
 [tape]: https://github.com/substack/tape
 [istanbul]: https://github.com/gotwarlost/istanbul
 [testling]: https://ci.testling.com
+
+[json]: http://www.json.org/

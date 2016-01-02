@@ -10,10 +10,17 @@ var opts = {
 ls( opts, onList );
 
 function onList( error, list ) {
+	var opts;
 	if ( error ) {
 		throw error;
 	}
-	urls( list, onUrls );
+	if ( !list.length ) {
+		return {};
+	}
+	opts = {
+		'packages': list
+	};
+	urls( opts, onUrls );
 }
 
 function onUrls( error, data ) {
