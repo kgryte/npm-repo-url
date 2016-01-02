@@ -13,8 +13,8 @@ var factory = require( './../lib/factory.js' );
 
 var getOpts = require( './fixtures/opts.js' );
 var data = {
-	'beep': 'boop',
-	'bap': 'bop'
+	'beep': 'boop/beep',
+	'bap': 'git://github.com/bop/bap.git'
 };
 
 
@@ -34,7 +34,7 @@ test( 'function throws an error if provided an invalid option', function test( t
 		factory( null, noop );
 	}
 	function bar() {
-		factory( {'username':1234}, noop );
+		factory( {'packages':null}, noop );
 	}
 });
 
@@ -75,15 +75,15 @@ test( 'function returns a function', function test( t ) {
 test( 'function returns a function which returns an error to a provided callback if an error is encountered when fetching repository urls', function test( t ) {
 	var factory;
 	var opts;
-	var get;
+	var fcn;
 
 	factory = proxyquire( './../lib/factory.js', {
 		'./get.js': get
 	});
 
 	opts = getOpts();
-	get = factory( opts, done );
-	get();
+	fcn = factory( opts, done );
+	fcn();
 
 	function get( opts, clbk ) {
 		setTimeout( onTimeout, 0 );
@@ -110,8 +110,8 @@ test( 'function returns a function which returns a package hash containing urls 
 	});
 
 	expected = {
-		'beep': 'boop',
-		'bap': 'bop'
+		'beep': 'boop/beep',
+		'bap': 'git://github.com/bop/bap.git'
 	};
 
 	opts = getOpts();
