@@ -2,7 +2,7 @@ Repository URLs
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][build-image]][build-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Get package repository URLs.
+> Get repository URLs for one or more packages.
 
 
 ## Installation
@@ -20,7 +20,7 @@ var urls = require( 'npm-package-repo-url' );
 
 #### urls( opts, clbk )
 
-Get package repository URLs.
+Get repository URLs for one or more packages.
 
 ``` javascript
 var opts = {
