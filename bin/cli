@@ -82,14 +82,15 @@ if ( args.protocol ) {
 urls( opts, clbk );
 
 /**
-* FUNCTION: clbk( error, data )
-*	Callback invoked upon receiving data.
+* FUNCTION: clbk( error, results )
+*	Callback invoked upon receiving results.
 *
 * @param {Error|Null} error - error object or null
-* @param {Object} data - data
+* @param {Object} results - results
 * @returns {Void}
 */
-function clbk( error, data ) {
+function clbk( error, results ) {
+	var data;
 	var keys;
 	var key;
 	var out;
@@ -97,6 +98,8 @@ function clbk( error, data ) {
 	if ( error ) {
 		throw error;
 	}
+	// Write data to stdout...
+	data = results.data;
 	keys = Object.keys( data );
 	for ( i = 0; i < keys.length; i++ ) {
 		key = keys[ i ];
@@ -110,6 +113,18 @@ function clbk( error, data ) {
 		}
 		out += '}';
 		process.stdout.write( out + '\n' );
+	}
+	// Write failures to stderr...
+	data = results.failures;
+	keys = Object.keys( data );
+	for ( i = 0; i < keys.length; i++ ) {
+		key = keys[ i ];
+		out = '{';
+		out += '\"'+key+'\"';
+		out += ':';
+		out += '\"'+data[ key ]+'\"';
+		out += '}';
+		process.stderr.write( out + '\n' );
 	}
 	process.exit( 0 );
 }

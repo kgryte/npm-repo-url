@@ -41,11 +41,18 @@ function clbk( error, data ) {
 	console.dir( data );
 	/*
 		{
-			"dstructs-matrix": "...",
-			"compute-erf": "...",
-			"log": null,
-			"utils-copy": "..."
-		}
+			"meta": {
+				"total": 4,
+				"success": 4,
+				"failure": 0
+			},
+			"data": {
+				"dstructs-matrix": "...",
+				"compute-erf": "...",
+				"log": null,
+				"utils-copy": "..."
+			},
+			"failures": {}
 	*/
 }
 ```
@@ -77,7 +84,9 @@ urls( opts, clbk );
 
 ## Notes
 
-*	Packages without an associated repository URL have a `url` value equal to `null`.
+*	If the module encounters an application-level `error` (e.g., no network connection, non-existent registry, etc), that `error` is returned immediately to the provided `callback`.
+*	If the module encounters a downstream `error` (e.g., timeout, reset connection, etc), that `error` is included in the returned results under the `failures` field.
+*	Successfully resolved packages without an associated repository URL have a `url` value equal to `null`.
 
 
 ## Examples
@@ -150,7 +159,8 @@ Options:
 
 ### Notes
 
-*	Each package and its associated repository URL is written to `stdout` as newline-delimited [`JSON`][json].
+*	If a package is successfully resolved, the `package:url` pair is written to `stdout` as newline-delimited [`JSON`][json].
+*	If a package cannot be resolved due to a downstream `error` (failure), the package (and its associated `error`) is written to `sterr` as newline-delimited [`JSON`][json].
 *	Output order is __not__ guaranteed to match input order.
 
 
