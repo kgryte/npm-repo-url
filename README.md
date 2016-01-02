@@ -47,10 +47,10 @@ function clbk( error, data ) {
 				"failure": 0
 			},
 			"data": {
-				"dstructs-matrix": "...",
-				"compute-erf": "...",
+				"dstructs-matrix": "https://github.com/dstructs/matrix.git",
+				"compute-erf": "https://github.com/compute-io/erf.git",
 				"log": null,
-				"utils-copy": "..."
+				"utils-copy": "https://github.com/kgryte/utils-copy.git"
 			},
 			"failures": {}
 	*/
@@ -168,10 +168,10 @@ Options:
 
 ``` bash
 $ DEBUG=* pkgrepo dstructs-matrix compute-erf utils-copy log
-# => {"dstructs-matrix":"..."}
+# => {"dstructs-matrix":"https://github.com/dstructs/matrix.git"}
 # => {"log":null}
-# => {"utils-copy":"..."}
-# => {"compute-erf":"..."}
+# => {"utils-copy":"https://github.com/kgryte/utils-copy.git"}
+# => {"compute-erf":"https://github.com/compute-io/erf.git"}
 ```
 
 
