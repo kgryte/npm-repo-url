@@ -85,6 +85,28 @@ urls( opts, clbk );
 ```
 
 
+#### urls.factory( opts, clbk )
+
+Creates a reusable `function`.
+
+``` javascript
+var pkgs = [
+	'dstructs-matrix',
+	'compute-stdev',
+	'compute-variance'
+];
+
+var get = urls.factory( {'packages': pkgs}, clbk );
+
+get();
+get();
+get();
+// ...
+```
+
+The factory method accepts the same `options` as `urls()`.
+
+
 ## Notes
 
 *	If the module encounters an application-level `error` (e.g., no network connection, non-existent registry, etc), that `error` is returned immediately to the provided `callback`.
@@ -110,7 +132,7 @@ function onList( error, list ) {
 		throw error;
 	}
 	if ( !list.length ) {
-		return {};
+		return;
 	}
 	opts = {
 		'packages': list

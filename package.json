@@ -33,6 +33,9 @@
     "list",
     "repo",
     "repository",
+    "info",
+    "show",
+    "view",
     "url",
     "cli",
     "utility",
@@ -40,6 +43,7 @@
     "utils",
     "util",
     "package",
+    "registry",
     "pkg",
     "get"
   ],
@@ -47,11 +51,10 @@
     "url": "https://github.com/kgryte/npm-repo-url/issues"
   },
   "dependencies": {
-    "debug": "^2.2.0",
     "minimist": "^1.2.0",
+    "npm-registry-package-info": "^1.0.0",
     "pkginfo": "^0.3.1",
     "update-notifier": "^0.6.0",
-    "utils-json-parse": "^1.0.0",
     "utils-merge2": "^1.0.0",
     "validate.io-function": "^1.0.2",
     "validate.io-nonnegative-integer": "^1.0.0",
@@ -62,7 +65,7 @@
   "devDependencies": {
     "@kgryte/noop": "^1.0.0",
     "browserify": "12.x.x",
-    "chai": "^3.4.1",
+    "chai": "3.x.x",
     "codecov.io": "^0.1.5",
     "istanbul": "^0.4.1",
     "jshint": "2.x.x",
@@ -73,8 +76,7 @@
     "proxyquireify": "^3.0.1",
     "tap-spec": "4.x.x",
     "tape": "4.x.x",
-    "testling": "1.x.x",
-    "utils-copy": "^1.1.0"
+    "testling": "1.x.x"
   },
   "testling": {
     "files": [

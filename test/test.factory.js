@@ -13,8 +13,15 @@ var factory = require( './../lib/factory.js' );
 
 var getOpts = require( './fixtures/opts.js' );
 var data = {
-	'beep': 'boop/beep',
-	'bap': 'git://github.com/bop/bap.git'
+	'meta': {
+		'total': 1,
+		'success': 1,
+		'failure': 0
+	},
+	'data': {
+		'dstructs-matrix': require( './fixtures/data.json' )
+	},
+	'failures': {}
 };
 
 
@@ -78,7 +85,7 @@ test( 'if a `port` option is not specified and the protocol is `https`, the defa
 	var fcn;
 
 	factory = proxyquire( './../lib/factory.js', {
-		'./get.js': get
+		'npm-registry-package-info': pkginfo
 	});
 
 	opts = getOpts();
@@ -88,7 +95,7 @@ test( 'if a `port` option is not specified and the protocol is `https`, the defa
 	fcn = factory( opts, noop );
 	fcn();
 
-	function get( opts ) {
+	function pkginfo( opts ) {
 		t.equal( opts.port, 443, 'sets the default port to `443` for HTTPS' );
 		t.end();
 	}
@@ -100,7 +107,7 @@ test( 'if a `port` option is not specified and the protocol is `http`, the defau
 	var fcn;
 
 	factory = proxyquire( './../lib/factory.js', {
-		'./get.js': get
+		'npm-registry-package-info': pkginfo
 	});
 
 	opts = getOpts();
@@ -110,7 +117,7 @@ test( 'if a `port` option is not specified and the protocol is `http`, the defau
 	fcn = factory( opts, noop );
 	fcn();
 
-	function get( opts ) {
+	function pkginfo( opts ) {
 		t.equal( opts.port, 80, 'sets the default port to `80` for HTTP' );
 		t.end();
 	}
@@ -122,14 +129,14 @@ test( 'function returns a function which returns an error to a provided callback
 	var fcn;
 
 	factory = proxyquire( './../lib/factory.js', {
-		'./get.js': get
+		'npm-registry-package-info': pkginfo
 	});
 
 	opts = getOpts();
 	fcn = factory( opts, done );
 	fcn();
 
-	function get( opts, clbk ) {
+	function pkginfo( opts, clbk ) {
 		setTimeout( onTimeout, 0 );
 		function onTimeout() {
 			clbk( new Error( 'beep' ) );
@@ -150,19 +157,26 @@ test( 'function returns a function which returns a package hash containing urls 
 	var fcn;
 
 	factory = proxyquire( './../lib/factory.js', {
-		'./get.js': get
+		'npm-registry-package-info': pkginfo
 	});
 
 	expected = {
-		'beep': 'boop/beep',
-		'bap': 'git://github.com/bop/bap.git'
+		'meta': {
+			'total': 1,
+			'success': 1,
+			'failure': 0
+		},
+		'data': {
+			'dstructs-matrix': 'git://github.com/dstructs/matrix.git'
+		},
+		'failures': {}
 	};
 
 	opts = getOpts();
 	fcn = factory( opts, done );
 	fcn();
 
-	function get( opts, clbk ) {
+	function pkginfo( opts, clbk ) {
 		setTimeout( onTimeout, 0 );
 		function onTimeout() {
 			clbk( null, data );

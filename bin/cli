@@ -137,7 +137,8 @@ function csv( stream, data ) {
 	keys = Object.keys( data );
 	for ( i = 0; i < keys.length; i++ ) {
 		k = keys[ i ];
-		v = data[ keys[ i ] ];
+		v = '' + data[ keys[ i ] ];
+		v = v.replace( /[\",]/g, '\\$&' );
 		if ( quotes ) {
 			k = quote( k );
 			v = quote( v );

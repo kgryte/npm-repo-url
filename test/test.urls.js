@@ -12,8 +12,16 @@ var urls = require( './../lib/urls.js' );
 
 var getOpts = require( './fixtures/opts.js' );
 var data = {
-	'beep': 'boop/beep',
-	'bap': 'git://github.com/bop/bap.git'
+	'meta': {
+		'total': 2,
+		'success': 2,
+		'failure': 0
+	},
+	'data': {
+		'beep': 'boop/beep',
+		'bap': 'git://github.com/bop/bap.git'
+	},
+	'failures': {}
 };
 
 
@@ -60,10 +68,7 @@ test( 'function returns a package hash containing repository urls to a provided 
 		'./factory.js': factory
 	});
 
-	expected = {
-		'beep': 'boop/beep',
-		'bap': 'git://github.com/bop/bap.git'
-	};
+	expected = data;
 
 	opts = getOpts();
 	urls( opts, done );
