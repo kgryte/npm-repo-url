@@ -8,14 +8,14 @@ Repository URLs
 ## Installation
 
 ``` bash
-$ npm install npm-package-repo-url
+$ npm install npm-repo-url
 ```
 
 
 ## Usage
 
 ``` javascript
-var urls = require( 'npm-package-repo-url' );
+var urls = require( 'npm-repo-url' );
 ```
 
 #### urls( opts, clbk )
@@ -96,7 +96,7 @@ urls( opts, clbk );
 
 ``` javascript
 var ls = require( 'npm-list-author-packages' );
-var urls = require( 'npm-package-repo-url' );
+var urls = require( 'npm-repo-url' );
 
 var opts = {
 	'username': 'kgryte'
@@ -141,7 +141,7 @@ $ DEBUG=* node ./examples/index.js
 To use the module as a general utility, install the module globally
 
 ``` bash
-$ npm install -g npm-package-repo-url
+$ npm install -g npm-repo-url
 ```
 
 
@@ -246,23 +246,23 @@ $ make view-browser-tests
 Copyright &copy; 2016. Athan Reines.
 
 
-[npm-image]: http://img.shields.io/npm/v/npm-package-repo-url.svg
-[npm-url]: https://npmjs.org/package/npm-package-repo-url
+[npm-image]: http://img.shields.io/npm/v/npm-repo-url.svg
+[npm-url]: https://npmjs.org/package/npm-repo-url
 
-[build-image]: http://img.shields.io/travis/kgryte/npm-package-repo-url/master.svg
-[build-url]: https://travis-ci.org/kgryte/npm-package-repo-url
+[build-image]: http://img.shields.io/travis/kgryte/npm-repo-url/master.svg
+[build-url]: https://travis-ci.org/kgryte/npm-repo-url
 
-[coverage-image]: https://img.shields.io/codecov/c/github/kgryte/npm-package-repo-url/master.svg
-[coverage-url]: https://codecov.io/github/kgryte/npm-package-repo-url?branch=master
+[coverage-image]: https://img.shields.io/codecov/c/github/kgryte/npm-repo-url/master.svg
+[coverage-url]: https://codecov.io/github/kgryte/npm-repo-url?branch=master
 
-[dependencies-image]: http://img.shields.io/david/kgryte/npm-package-repo-url.svg
-[dependencies-url]: https://david-dm.org/kgryte/npm-package-repo-url
+[dependencies-image]: http://img.shields.io/david/kgryte/npm-repo-url.svg
+[dependencies-url]: https://david-dm.org/kgryte/npm-repo-url
 
-[dev-dependencies-image]: http://img.shields.io/david/dev/kgryte/npm-package-repo-url.svg
-[dev-dependencies-url]: https://david-dm.org/dev/kgryte/npm-package-repo-url
+[dev-dependencies-image]: http://img.shields.io/david/dev/kgryte/npm-repo-url.svg
+[dev-dependencies-url]: https://david-dm.org/dev/kgryte/npm-repo-url
 
-[github-issues-image]: http://img.shields.io/github/issues/kgryte/npm-package-repo-url.svg
-[github-issues-url]: https://github.com/kgryte/npm-package-repo-url/issues
+[github-issues-image]: http://img.shields.io/github/issues/kgryte/npm-repo-url.svg
+[github-issues-url]: https://github.com/kgryte/npm-repo-url/issues
 
 [tape]: https://github.com/substack/tape
 [istanbul]: https://github.com/gotwarlost/istanbul

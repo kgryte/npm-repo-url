@@ -1,5 +1,5 @@
 {
-  "name": "npm-package-repo-url",
+  "name": "npm-repo-url",
   "version": "0.0.0",
   "description": "Get repository URLs for one or more packages.",
   "author": {
@@ -26,7 +26,7 @@
   "main": "./lib",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgryte/npm-package-repo-url.git"
+    "url": "git://github.com/kgryte/npm-repo-url.git"
   },
   "keywords": [
     "npm",
@@ -44,7 +44,7 @@
     "get"
   ],
   "bugs": {
-    "url": "https://github.com/kgryte/npm-package-repo-url/issues"
+    "url": "https://github.com/kgryte/npm-repo-url/issues"
   },
   "dependencies": {
     "debug": "^2.2.0",
