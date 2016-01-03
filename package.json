@@ -1,6 +1,6 @@
 {
   "name": "npm-repo-url",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Get repository URLs for one or more packages.",
   "author": {
     "name": "Athan Reines",
