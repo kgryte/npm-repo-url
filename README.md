@@ -64,8 +64,8 @@ The `function` accepts the following `options`:
 
 *	__packages__: `array` of package names (*required*).
 *	__registry__: registry. Default: `'registry.npmjs.org'`.
-*	__port__: registry port. Default: `80`.
-* 	__protocol__: registry protocol. Default: `'http'`.
+*	__port__: registry port. Default: `443` (HTTPS) or `80` (HTTP).
+* 	__protocol__: registry protocol. Default: `'https'`.
 
 To query an alternative registry, set the relevant options.
 
@@ -78,7 +78,7 @@ var opts = {
 	],
 	'registry': 'my.favorite.npm/registry',
 	'port': 80,
-	'protocol': 'https'
+	'protocol': 'http'
 };
 
 urls( opts, clbk );
@@ -154,9 +154,9 @@ Options:
 
   -h,  --help                Print this message.
   -V,  --version             Print the package version.
-  -p,  --port port           Registry port. Default: 80.
+  -p,  --port port           Registry port. Default: 443 (HTTPS) or 80 (HTTP).
        --registry registry   Registry. Default: 'registry.npmjs.org'.
-       --protocol protocol   Registry protocol. Default: 'http'.
+       --protocol protocol   Registry protocol. Default: 'https'.
        --format format       Output format: csv or json. Default: 'csv'.
        --delimiter delimiter CSV column delimiter. Default: ','.
        --quotes              Wrap CSV column values in quotes.
