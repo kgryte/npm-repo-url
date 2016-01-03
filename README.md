@@ -18,6 +18,7 @@ $ npm install npm-repo-url
 var urls = require( 'npm-repo-url' );
 ```
 
+<a name="urls"></a>
 #### urls( opts, clbk )
 
 Get repository URLs for one or more packages.
@@ -104,7 +105,7 @@ get();
 // ...
 ```
 
-The factory method accepts the same `options` as `urls()`.
+The factory method accepts the same `options` as [`urls()`](#urls).
 
 
 ## Notes
