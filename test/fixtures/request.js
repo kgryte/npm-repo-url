@@ -16,9 +16,10 @@ var Response = require( './response.js' );
 * @param {Object} ref - reference to parent object
 * @param {Error|Null} err - error object
 * @param {Number} [statusCode=200] - response status code
+* @param {String} [body] - response body
 * @returns {Request} mock HTTP request constructor
 */
-function create( ref, err, statusCode ) {
+function create( ref, err, statusCode, body ) {
 	statusCode = statusCode || 200;
 
 	/**
@@ -55,7 +56,7 @@ function create( ref, err, statusCode ) {
 			if ( err ) {
 				return self.emit( 'error', err );
 			}
-			clbk( new Response( statusCode ) );
+			clbk( new Response( statusCode, body ) );
 		}
 	} // end FUNCTION Request()
 

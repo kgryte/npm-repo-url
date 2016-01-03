@@ -10,14 +10,15 @@ var data = require( './data.json' );
 // RESPONSE //
 
 /**
-* FUNCTION: Response( statusCode )
+* FUNCTION: Response( statusCode, body )
 *	Mock HTTP response constructor.
 *
 * @constructor
 * @param {Number} statusCode - mock status code
+* @param {String} body - mock response body
 * @returns {Response} mock HTTP response object
 */
-function Response( statusCode ) {
+function Response( statusCode, body ) {
 	var self;
 	if ( !( this instanceof Response ) ) {
 		return new Response( statusCode );
@@ -38,11 +39,22 @@ function Response( statusCode ) {
 	* @returns {Void}
 	*/
 	function onTimeout() {
+		var d;
 		if ( statusCode !== 200 ) {
-			self.emit( 'data', 'bad request' );
+			if ( statusCode === 404 ) {
+				d = '{}';
+			} else {
+				d = 'bad request';
+			}
+			self.emit( 'data', d );
 			return self.emit( 'end' );
 		}
-		self.emit( 'data', JSON.stringify( data ) );
+		if ( body ) {
+			d = body;
+		} else {
+			d = JSON.stringify( data );
+		}
+		self.emit( 'data', d );
 		self.emit( 'end' );
 	}
 } // end FUNCTION Response()
