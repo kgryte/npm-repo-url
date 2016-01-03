@@ -84,7 +84,6 @@ if (
 ) {
 	throw new Error( 'invalid option. Format option must be either `csv` or `json`. Option: `' + args.format + '`.' );
 }
-
 fmt = args.format || 'csv';
 delimiter = args.delimiter || ',';
 
