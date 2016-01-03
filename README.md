@@ -28,7 +28,8 @@ var opts = {
 		'dstructs-matrix',
 		'compute-erf',
 		'log',
-		'utils-copy'
+		'utils-copy',
+		'unknown_package_name'
 	]	
 };
 
@@ -42,9 +43,9 @@ function clbk( error, data ) {
 	/*
 		{
 			"meta": {
-				"total": 4,
+				"total": 5,
 				"success": 4,
-				"failure": 0
+				"failure": 1
 			},
 			"data": {
 				"dstructs-matrix": "https://github.com/dstructs/matrix.git",
@@ -52,7 +53,9 @@ function clbk( error, data ) {
 				"log": null,
 				"utils-copy": "https://github.com/kgryte/utils-copy.git"
 			},
-			"failures": {}
+			"failures": {
+				"unknown_package_name": "Not Found"
+			}
 	*/
 }
 ```
