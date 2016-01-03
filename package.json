@@ -67,7 +67,7 @@
     "istanbul": "^0.4.1",
     "jshint": "2.x.x",
     "jshint-stylish": "2.x.x",
-    "npm-list-author-packages": "^1.0.0",
+    "npm-list-author-packages": "^2.0.1",
     "proxyquire": "^1.7.3",
     "proxyquire-universal": "^1.0.8",
     "proxyquireify": "^3.0.1",
