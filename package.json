@@ -73,7 +73,8 @@
     "proxyquireify": "^3.0.1",
     "tap-spec": "4.x.x",
     "tape": "4.x.x",
-    "testling": "1.x.x"
+    "testling": "1.x.x",
+    "utils-copy": "^1.1.0"
   },
   "testling": {
     "files": [

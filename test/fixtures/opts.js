@@ -3,8 +3,7 @@
 function getOpts() {
 	var opts = {
 		'packages': [
-			'beep',
-			'boop'
+			'dstructs-matrix'
 		],
 		'registry': 'registry.npmjs.org',
 		'port': 80,
