@@ -15,6 +15,7 @@ var urls = require( './../lib' );
 // VARIABLES //
 
 var delimiter;
+var quotes;
 var args;
 var pkg;
 var fmt;
@@ -86,6 +87,7 @@ if (
 }
 fmt = args.format || 'csv';
 delimiter = args.delimiter || ',';
+quotes = args.quotes || false;
 
 
 // GET URLS //
@@ -128,14 +130,34 @@ function clbk( error, results ) {
 function csv( stream, data ) {
 	var keys;
 	var out;
+	var k;
+	var v;
 	var i;
 
 	keys = Object.keys( data );
 	for ( i = 0; i < keys.length; i++ ) {
-		out = keys[ i ] + delimiter + data[ keys[i] ] + '\n';
+		k = keys[ i ];
+		v = data[ keys[ i ] ];
+		if ( quotes ) {
+			k = quote( k );
+			v = quote( v );
+		}
+		out = k + delimiter + v + '\n';
 		stream.write( out, 'utf8' );
 	}
 } // end FUNCTION csv()
+
+/**
+* FUNCTION: quote( value )
+*	Wraps a value in quotes.
+*
+* @private
+* @param {String} value - value to wrap
+* @returns {String} wrapped value
+*/
+function quote( value ) {
+	return '\"' + value + '\"';
+} // end FUNCTION quote()
 
 /**
 * FUNCTION: ndjson( stream, data )

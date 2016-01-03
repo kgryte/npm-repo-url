@@ -1,7 +1,8 @@
 {
 	"boolean": [
 		"help",
-		"version"
+		"version",
+		"quotes"
 	],
 	"string": [
 		"port",
