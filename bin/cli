@@ -114,7 +114,7 @@ function clbk( error, results ) {
 
 /**
 * FUNCTION: csv( stream, data )
-*	Writes newline-delimited comma-separated values to a writable stream.
+*	Writes newline-delimited column-separated values to a writable stream.
 *
 * @private
 * @param {Stream} stream - writable stream
@@ -149,11 +149,9 @@ function ndjson( stream, data ) {
 
 	keys = Object.keys( data );
 	for ( i = 0; i < keys.length; i++ ) {
-		out = '{';
-		out += '\"'+keys[i]+'\"';
-		out += ':';
-		out += JSON.stringify( data[ keys[i] ] );
-		out += '}\n';
+		out = {};
+		out[ keys[i] ] = data[ keys[i] ];
+		out = JSON.stringify( out ) + '\n';
 		stream.write( out, 'utf8' );
 	}
 } // end FUNCTION ndjson()
