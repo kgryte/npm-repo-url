@@ -269,4 +269,4 @@ Copyright &copy; 2016. Athan Reines.
 [testling]: https://ci.testling.com
 
 [csv]: https://en.wikipedia.org/wiki/Comma-separated_values
-[ndjson]: http://jsonlines.org/
+[ndjson]: https://github.com/ndjson/ndjson-spec
