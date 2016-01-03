@@ -6,7 +6,8 @@
 	"string": [
 		"port",
 		"registry",
-		"protocol"
+		"protocol",
+		"format"
 	],
 	"alias": {
 		"help": [

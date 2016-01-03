@@ -75,6 +75,13 @@ if ( args.registry ) {
 if ( args.protocol ) {
 	opts.protocol = args.protocol;
 }
+if (
+	args.format &&
+	args.format !== 'csv' &&
+	args.format !== 'json'
+) {
+	throw new Error( 'invalid option. Format option must be either `csv` or `json`. Option: `' + args.format + '`.' );
+}
 
 
 // GET URLS //
@@ -85,46 +92,68 @@ urls( opts, clbk );
 * FUNCTION: clbk( error, results )
 *	Callback invoked upon receiving results.
 *
+* @private
 * @param {Error|Null} error - error object or null
 * @param {Object} results - results
 * @returns {Void}
 */
 function clbk( error, results ) {
-	var data;
-	var keys;
-	var key;
-	var out;
-	var i;
+	var writer;
 	if ( error ) {
 		throw error;
 	}
-	// Write data to stdout...
-	data = results.data;
-	keys = Object.keys( data );
-	for ( i = 0; i < keys.length; i++ ) {
-		key = keys[ i ];
-		out = '{';
-		out += '\"'+key+'\"';
-		out += ':';
-		if ( data[ key ] === null ) {
-			out += 'null';
-		} else {
-			out += '\"'+data[ key ]+'\"';
-		}
-		out += '}';
-		process.stdout.write( out + '\n' );
+	if ( args.format === 'json' ) {
+		writer = ndjson;
+	} else {
+		writer = csv;
 	}
-	// Write failures to stderr...
-	data = results.failures;
-	keys = Object.keys( data );
-	for ( i = 0; i < keys.length; i++ ) {
-		key = keys[ i ];
-		out = '{';
-		out += '\"'+key+'\"';
-		out += ':';
-		out += '\"'+data[ key ]+'\"';
-		out += '}';
-		process.stderr.write( out + '\n' );
-	}
+	writer( process.stdout, results.data );
+	writer( process.stderr, results.failures );
 	process.exit( 0 );
-}
+} // end FUNCTION clbk()
+
+/**
+* FUNCTION: csv( stream, data )
+*	Writes newline-delimited comma-separated values to a writable stream.
+*
+* @private
+* @param {Stream} stream - writable stream
+* @param {Object} data - data to write
+* @returns {Void}
+*/
+function csv( stream, data ) {
+	var keys;
+	var out;
+	var i;
+
+	keys = Object.keys( data );
+	for ( i = 0; i < keys.length; i++ ) {
+		out = keys[ i ] + ',' + data[ keys[i] ] + '\n';
+		stream.write( out, 'utf8' );
+	}
+} // end FUNCTION csv()
+
+/**
+* FUNCTION: ndjson( stream, data )
+*	Writes newline-delimited JSON to a writable stream.
+*
+* @private
+* @param {Stream} stream - writable stream
+* @param {Object} data - data to write
+* @returns {Void}
+*/
+function ndjson( stream, data ) {
+	var keys;
+	var out;
+	var i;
+
+	keys = Object.keys( data );
+	for ( i = 0; i < keys.length; i++ ) {
+		out = '{';
+		out += '\"'+keys[i]+'\"';
+		out += ':';
+		out += JSON.stringify( data[ keys[i] ] );
+		out += '}\n';
+		stream.write( out, 'utf8' );
+	}
+} // end FUNCTION ndjson()

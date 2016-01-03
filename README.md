@@ -157,13 +157,14 @@ Options:
   -p,  --port port           Registry port. Default: 80.
        --registry registry   Registry. Default: 'registry.npmjs.org'.
        --protocol protocol   Registry protocol. Default: 'http'.
+       --format format       Output format: csv or json. Default: 'csv'.
 ```
 
 
 ### Notes
 
-*	If a package is successfully resolved, the `package:url` pair is written to `stdout` as newline-delimited [`JSON`][json].
-*	If a package cannot be resolved due to a downstream `error` (failure), the package (and its associated `error`) is written to `sterr` as newline-delimited [`JSON`][json].
+*	If a package is successfully resolved, the `package:url` pair is written to `stdout`.
+*	If a package cannot be resolved due to a downstream `error` (failure), the package (and its associated `error`) is written to `sterr`.
 *	Output order is __not__ guaranteed to match input order.
 
 
@@ -171,6 +172,16 @@ Options:
 
 ``` bash
 $ DEBUG=* pkgrepo dstructs-matrix compute-erf utils-copy log
+# => dstructs-matrix,https://github.com/dstructs/matrix.git
+# => log,null
+# => utils-copy,https://github.com/kgryte/utils-copy.git
+# => compute-erf,https://github.com/compute-io/erf.git
+```
+
+To output as newline-delimited JSON ([ndjson][ndjson]), set the `format` option.
+
+``` bash
+$ DEBUG=* pkgrepo --format=json dstructs-matrix compute-erf utils-copy log
 # => {"dstructs-matrix":"https://github.com/dstructs/matrix.git"}
 # => {"log":null}
 # => {"utils-copy":"https://github.com/kgryte/utils-copy.git"}
@@ -257,4 +268,5 @@ Copyright &copy; 2016. Athan Reines.
 [istanbul]: https://github.com/gotwarlost/istanbul
 [testling]: https://ci.testling.com
 
-[json]: http://www.json.org/
+[csv]: https://en.wikipedia.org/wiki/Comma-separated_values
+[ndjson]: http://jsonlines.org/
