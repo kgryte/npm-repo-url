@@ -7,7 +7,8 @@
 		"port",
 		"registry",
 		"protocol",
-		"format"
+		"format",
+		"delimiter"
 	],
 	"alias": {
 		"help": [

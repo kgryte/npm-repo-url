@@ -158,6 +158,7 @@ Options:
        --registry registry   Registry. Default: 'registry.npmjs.org'.
        --protocol protocol   Registry protocol. Default: 'http'.
        --format format       Output format: csv or json. Default: 'csv'.
+       --delimiter delimiter CSV column delimiter. Default: ','.
 ```
 
 

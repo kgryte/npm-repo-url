@@ -14,8 +14,10 @@ var urls = require( './../lib' );
 
 // VARIABLES //
 
+var delimiter;
 var args;
 var pkg;
+var fmt;
 
 
 // INIT //
@@ -83,6 +85,9 @@ if (
 	throw new Error( 'invalid option. Format option must be either `csv` or `json`. Option: `' + args.format + '`.' );
 }
 
+fmt = args.format || 'csv';
+delimiter = args.delimiter || ',';
+
 
 // GET URLS //
 
@@ -102,7 +107,7 @@ function clbk( error, results ) {
 	if ( error ) {
 		throw error;
 	}
-	if ( args.format === 'json' ) {
+	if ( fmt === 'json' ) {
 		writer = ndjson;
 	} else {
 		writer = csv;
@@ -128,7 +133,7 @@ function csv( stream, data ) {
 
 	keys = Object.keys( data );
 	for ( i = 0; i < keys.length; i++ ) {
-		out = keys[ i ] + ',' + data[ keys[i] ] + '\n';
+		out = keys[ i ] + delimiter + data[ keys[i] ] + '\n';
 		stream.write( out, 'utf8' );
 	}
 } // end FUNCTION csv()
